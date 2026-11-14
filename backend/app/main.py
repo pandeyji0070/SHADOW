@@ -1,5 +1,5 @@
-
 from fastapi import FastAPI
+from app.routes import router
 
 app = FastAPI(
     title="SHADOW API",
@@ -7,17 +7,12 @@ app = FastAPI(
     version="1.0.0"
 )
 
-@app.get("/")
-def home():
+app.include_router(router)
+
+@app.get("/api/info")
+def project_info():
     return {
         "project": "SHADOW",
-        "message": "SHADOW Backend is running",
-        "status": "success"
-    }
-
-@app.get("/health")
-def health_check():
-    return {
-        "status": "healthy",
-        "service": "SHADOW Backend"
+        "version": "1.0.0",
+        "status": "development"
     }
